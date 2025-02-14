@@ -1,6 +1,14 @@
-let captcha;
+let captcha, time, input;
 let correct = 0;
-let input;
+let score = 0;
+
+document.addEventListener("mouseup", start)
+
+function start() {
+    generate();
+    addTimerEvents();
+    document.removeEventListener("mouseup", start)
+}
 
 function hashCode(string) {
     let hash = 0,
@@ -15,7 +23,6 @@ function hashCode(string) {
 }
 
 function generate() {
-
     input = document.getElementById("submit");
     // Clear old input
     input.value = "";
@@ -50,13 +57,13 @@ function generate() {
             Math.random() * randomchar.length)
     }
 
-    // some widths
+    // Some measurements
     let metrics = ctx.measureText(uniquechar);
     let fontHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
-    let actualHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+    // let actualHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
 
     // Store generated input
-    ctx.fillText(uniquechar, captcha.width/2-metrics.width/2, captcha.height/2+actualHeight/2);
+    ctx.fillText(uniquechar, captcha.width/2-metrics.width/2, captcha.height/2+fontHeight/2-10);
     correct = hashCode(uniquechar)
 }
 
@@ -69,13 +76,34 @@ function printmsg() {
     // Check whether the input is equal
     // to generated captcha or not
     if (hashCode(usr_input) === correct) {
-        let s = document.getElementById("key")
-            .innerHTML = "Matched";
+        document.getElementById("key").innerHTML = "Score: "+ (++score);
         generate();
     }
     else {
-        let s = document.getElementById("key")
-            .innerHTML = "not Matched";
+        document.getElementById("key").innerHTML = "Wrong";
         generate();
     }
+}
+
+function addTimerEvents() {
+    resetTimer();
+    // DOM Events
+    const events = ['keydown', 'keyup'];
+    events.forEach(function(name) {
+        document.addEventListener(name, resetTimer, true);
+    });
+}
+
+function logout() {
+    alert("You have timed out. Your final score is "+score+".")
+    score = 0;
+    document.getElementById("key").innerHTML = "Score: "+ score;
+    generate();
+    resetTimer();
+}
+
+function resetTimer() {
+    clearTimeout(time);
+    time = setTimeout(logout, 3000)
+    // 1000 milliseconds = 1 second
 }
