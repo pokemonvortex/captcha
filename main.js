@@ -22,66 +22,6 @@ function hashCode(string) {
     return hash;
 }
 
-// function getImgValiCode () {
-//     let showNum = [];
-//     let captcha.width = 150;
-//     let captcha.height = 30;
-//     let canvas = document.getElementById('valicode');
-//     let ctx = canvas.getctx('2d');
-//     canvas.width = captcha.width;
-//     canvas.height = captcha.height;
-//     let sCode = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0,1,2,3,4,5,6,7,8,9,!,@,#,$,%,^,&,*,(,)';
-//     let saCode = sCode.split(',');
-//     let saCodeLen = saCode.length;
-//     for (let i = 0; i <= 3; i++) {
-//       let sIndex = Math.floor(Math.random()*saCodeLen);
-//       let sDeg = (Math.random()*30*Math.PI) / 180;
-//       let cTxt = saCode[sIndex];
-//       showNum[i] = cTxt.toLowerCase();
-//       let x = 10 + i*20;
-//       let y = 20 + Math.random()*8;
-//       ctx.font = 'bold 23px 微软雅黑';
-//       ctx.translate(x, y);
-//       ctx.rotate(sDeg);
-  
-//       ctx.fillStyle = randomColor();
-//       ctx.fillText(cTxt, 0, 0);
-  
-//       ctx.rotate(-sDeg);
-//       ctx.translate(-x, -y);
-//     }
-//     for (let i = 0; i <= 5; i++) {
-//       ctx.strokeStyle = randomColor();
-//       ctx.beginPath();
-//       ctx.moveTo(
-//         Math.random() * captcha.width,
-//         Math.random() * captcha.height
-//       );
-//       ctx.lineTo(
-//         Math.random() * captcha.width,
-//         Math.random() * captcha.height
-//       );
-//       ctx.stroke();
-//     }
-//     for (let i = 0; i < 30; i++) {
-//       ctx.strokeStyle = randomColor();
-//       ctx.beginPath();
-//       let x = Math.random() * captcha.width;
-//       let y = Math.random() * captcha.height;
-//       ctx.moveTo(x,y);
-//       ctx.lineTo(x+1, y+1);
-//       ctx.stroke();
-//     }
-//     rightCode = showNum.join('');
-//   }
-  
-//   function randomColor () {
-//     let r = Math.floor(Math.random()*256);
-//     let g = Math.floor(Math.random()*256);
-//     let b = Math.floor(Math.random()*256);
-//     return 'rgb(' + r + ',' + g + ',' + b + ')';
-//   }
-
 function generate() {
     input = document.getElementById("submit");
     // Clear old input
@@ -117,10 +57,10 @@ function generate() {
 
     // Generate captcha for length of
     // 5 with random character
-    for (let i = 1; i < 7; i++) {
-        uniquechar += randomchar.charAt(
-            Math.random() * randomchar.length)
-    }
+    // for (let i = 1; i < 7; i++) {
+    //     uniquechar += randomchar.charAt(
+    //         Math.random() * randomchar.length)
+    // }
 
     for (let i = 0; i <= 6; i++) {
         let sIndex = Math.floor(Math.random()*randomchar.length);
