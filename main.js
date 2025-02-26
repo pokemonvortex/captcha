@@ -66,8 +66,7 @@ function generate() {
         let sIndex = Math.floor(Math.random()*randomchar.length);
         let sDeg = (Math.random()*30*Math.PI) / 180;
         let cTxt = randomchar[sIndex];
-        uniquechar += randomchar.charAt(
-            Math.random() * randomchar.length);
+        uniquechar += cTxt;
         let x = 10 + i*40;
         let y = captcha.height/2+fontHeight/2 - 10 + (Math.random() - 0.5) * 20;
         ctx.font = 'bold 48px 微软雅黑';
